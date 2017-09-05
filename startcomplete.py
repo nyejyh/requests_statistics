@@ -29,6 +29,11 @@ class Lister() :
             startCount = 0 # running counter req started per folder
             finishCount = 0 # running counter req finish per folder
             failCount = 0 # running counter req fail per folder
+            # make date columns
+            monthDict = {"Jan":"01", "Feb":"02", "Mar":"03", "Apr":"04", "May":"05", "Jun":"06", "Jul":"07", "Aug":"08", "Sep":"09", "Oct":"10", "Nov":"11", "Dec":"12"}
+            dateMonth = []
+            dateDay = []
+            dateTime = []
 
             sDir = os.listdir(os.path.abspath(os.path.join("/data/logstash/" +
             fDir[z])))
@@ -73,12 +78,21 @@ class Lister() :
                         failCount += 1
                     else :
                         raise ValueError("None of the counters changed.")
+                    # Implement dates
+                    dateMonth.append(monthDict[crackedLine[0]])
+                    dateDay.append(crackedLine[1])
+                    dateTime.append(crackedLine[2])
+                    sorted(dateMonth)
+                    sorted(dateDay)
+                    sorted(dateTime)
                     cracktext.close()
 
             startCalc = "{0:.0f}%".format(startCount / fileCount)
             finishCalc = "{0:.0f}%".format(finishCount / fileCount)
             failCalc = "{0:.0f}%".format(failCount / fileCount)
 
+            print fDir[z] + " start date: %s-%s, %s" % (dateMonth[0], dateDay[0], dateTime[0])
+            print fDir[z] + " end date: %s-%s, %s" % (dateMonth[-1], dateDay[-1], dateTime[-1])
             print fDir[z] + ": %s files, %s (%s) started, %s (%s) finish, %s (%s) fail." % \
             (fileCount, startCount, startCalc, finishCount, finishCalc, failCount, failCalc)
         
