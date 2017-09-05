@@ -1,4 +1,4 @@
-# requests_statistics
+# Requests Retrieval and Calculations
 Obtain information by ELK and make calculations based on it.
 
 This script assumes that the user has two levels of directories.  The first level contains the folders.  The second level contains the text files.  Script will open text files with the format "YYYYMMDDHHMMSS".
