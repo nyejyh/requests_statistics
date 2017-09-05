@@ -30,7 +30,9 @@ class Lister() :
             finishCount = 0 # running counter req finish per folder
             failCount = 0 # running counter req fail per folder
             # make date columns
-            monthDict = {"Jan":"01", "Feb":"02", "Mar":"03", "Apr":"04", "May":"05", "Jun":"06", "Jul":"07", "Aug":"08", "Sep":"09", "Oct":"10", "Nov":"11", "Dec":"12"}
+            monthDict = {"Jan":"01", "Feb":"02", "Mar":"03", "Apr":"04",
+            "May":"05", "Jun":"06", "Jul":"07", "Aug":"08", "Sep":"09", 
+            "Oct":"10", "Nov":"11", "Dec":"12"}
             dateMonth = []
             dateDay = []
             dateTime = []
@@ -40,15 +42,15 @@ class Lister() :
 
             # reading test
             for i in range(len(sDir)):
-                filename = sDir[i]
-                cracktext = open("/data/logstash/%s/%s" % (fDir[z], filename), "r")
+                fileName = sDir[i]
+                crackText = open("/data/logstash/%s/%s" % (fDir[z], fileName), "r")
                 fileCount += 1 # how many files per folder
                 reqFileCount += 1 # the total file count
 
-                with cracktext :
+                with crackText :
                     # Define variables
                     threshold = 500 # expected combination of contents and extras
-                    crackedLine = (cracktext.readline()).split() # cut up line to list
+                    crackedLine = (crackText.readline()).split() # cut up line to list
                     totalByte = crackedLine[12] # the total byte from list
                     # Find the anchor
                     for count, elem in enumerate(crackedLine) :
@@ -85,7 +87,7 @@ class Lister() :
                     sorted(dateMonth)
                     sorted(dateDay)
                     sorted(dateTime)
-                    cracktext.close()
+                    crackText.close()
 
             startCalc = "{0:.0f}%".format(startCount / fileCount)
             finishCalc = "{0:.0f}%".format(finishCount / fileCount)
